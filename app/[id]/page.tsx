@@ -7,7 +7,7 @@ import { MainContent } from "@/components/main-content";
 import { NavBar } from "@/components/nav-bar";
 import { ProfileTitle } from "@/components/title";
 import { UserNotFound } from "@/components/user-not-found";
-import { findByUserById } from "@/services/findByUserById";
+import { findByAllUsers, findByUserById } from "@/services/person-service";
 import { Link } from "@/types/types";
 
 interface HomeProps {
@@ -28,7 +28,16 @@ export async function generateMetadata({ params }: HomeProps) {
   };
 }
 
-export default async function Home({ params }: HomeProps) {
+export async function generateStaticParams() {
+  const persons = await findByAllUsers();
+  return persons.map((person) => ({
+    params: {
+      id: person.id,
+    },
+  }));
+}
+
+export default async function CardLink({ params }: HomeProps) {
   const data = await findByUserById(params.id);
 
   if (data.name == "") {

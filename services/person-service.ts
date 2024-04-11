@@ -31,3 +31,8 @@ export async function findByUserById(id: any) {
     };
   }
 }
+
+export async function findByAllUsers() {
+  const persons: Person[] = await db.persons.findMany();
+  return persons;
+}
