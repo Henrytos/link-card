@@ -32,7 +32,7 @@ export default function Login() {
 
   const handleFormSubmit = (data: SchemaForm) => {
     const password = data.password;
-    if (password === "Hfra2006") {
+    if (password === "Hfra2006" && localStorage !== undefined) {
       localStorage.setItem("is_authenticated", JSON.stringify(true));
       const token = localStorage.getItem("is_authenticated");
       push("/auth");
