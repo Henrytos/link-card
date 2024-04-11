@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 
-export default function AuthAdmin() {
-  let is_authenticated = false;
+/** 
+ *   let is_authenticated = false;
 
   if (typeof window !== "undefined") {
     if (
@@ -20,6 +20,8 @@ export default function AuthAdmin() {
     push("/login");
   }
 
+ */
+export default function AuthAdmin() {
   return (
     <main className="w-full min-h-screen bg-zinc-900 text-zinc-100 antialiased">
       <h1>bem vindo</h1>
