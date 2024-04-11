@@ -9,7 +9,7 @@ import { ProfileTitle } from "@/components/title";
 import { UserNotFound } from "@/components/user-not-found";
 import { findByAllUsers, findByUserById } from "@/services/person-service";
 import { Link } from "@/types/types";
-
+import { findByIcon } from "./icons";
 interface HomeProps {
   params: {
     id: string;
@@ -66,6 +66,7 @@ export default async function CardLink({ params }: HomeProps) {
           <ContentLinkProfile>
             {links.map((link) => (
               <LinkProfile key={link.url} href={link.url}>
+                {findByIcon(link.name.toLocaleLowerCase())}
                 {link.name}
               </LinkProfile>
             ))}
