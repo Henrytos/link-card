@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation";
 export default function AuthAdmin() {
   let is_authenticated = false;
 
-  if (
-    localStorage.getItem("is_authenticated") === null &&
-    localStorage !== undefined
-  ) {
-    is_authenticated = Boolean(localStorage.getItem("is_authenticated"));
+  if (typeof window !== "undefined") {
+    if (
+      localStorage.getItem("is_authenticated") === null &&
+      localStorage !== undefined
+    ) {
+      is_authenticated = Boolean(localStorage.getItem("is_authenticated"));
+    }
   }
 
   const { push } = useRouter();

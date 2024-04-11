@@ -32,14 +32,17 @@ export default function Login() {
 
   const handleFormSubmit = (data: SchemaForm) => {
     const password = data.password;
-    if (password === "Hfra2006" && localStorage !== undefined) {
-      localStorage.setItem("is_authenticated", JSON.stringify(true));
-      const token = localStorage.getItem("is_authenticated");
-      push("/auth");
-      reset();
-      setError("password", { message: "" });
+    if (typeof window !== "undefined") {
+      if (password === "Hfra2006" && localStorage !== undefined) {
+        localStorage.setItem("is_authenticated", JSON.stringify(true));
+        const token = localStorage.getItem("is_authenticated");
+        push("/auth");
+        reset();
+        setError("password", { message: "" });
+      } else {
+        setError("password", { message: "senha incorreta" });
+      }
     }
-    setError("password", { message: "senha incorreta" });
   };
 
   return (
