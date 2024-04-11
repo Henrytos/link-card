@@ -18,14 +18,11 @@ type link{
   url String
 }
 
-type person {
-  id String
-  name String
-  links link[]
-  srcImg String
-}
+
 
 model persons{
   id     String @id @default(auto()) @map("_id") @db.ObjectId
-  person person[]
+  name String
+  links link[]
+  srcImg String
 }

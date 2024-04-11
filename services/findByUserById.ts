@@ -1,18 +1,33 @@
 import { db } from "@/lib/db";
 import { Link, Person } from "@/types/types";
 
-export async function findByUserById(id: string) {
-  const persons = await db.persons.findFirst();
-  const person: Person =
-    persons?.person.find((person) => person.id === id) ?? {};
+export async function findByUserById(id: any) {
+  try {
+    const person = await db.persons.findFirst({
+      where: {
+        id: id,
+      },
+    });
 
-  const name = person.name ?? "";
-  const srcImg: string = person.srcImg ?? "";
-  const links: Link[] = person.links ?? [];
-
-  return {
-    name,
-    srcImg,
-    links,
-  };
+    if (person) {
+      return {
+        name: person.name,
+        srcImg: person.srcImg,
+        links: person?.links,
+      };
+    } else {
+      return {
+        name: "",
+        srcImg: "",
+        links: [],
+      };
+    }
+  } catch (error) {
+    console.log(`erro no findByUserById: ${error}`);
+    return {
+      name: "",
+      srcImg: "",
+      links: [],
+    };
+  }
 }
