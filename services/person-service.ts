@@ -1,5 +1,6 @@
+"use server";
 import { db } from "@/lib/db";
-import { Link, Person } from "@/types/types";
+import { Person } from "@/types/types";
 
 export async function findByUserById(id: any) {
   try {

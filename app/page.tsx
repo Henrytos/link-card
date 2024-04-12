@@ -1,13 +1,25 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
 // eslint-disable-next-line @next/next/no-img-element
 
 import { LinkProfile } from "@/components/link";
 import { findByAllUsers } from "@/services/person-service";
+import { Person } from "@/types/types";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default async function Users() {
-  const persons = await findByAllUsers();
+export default function Users() {
+  const [persons, setPersons] = useState<Person[]>([]);
+  const fetchData = async () => {
+    const persons = await findByAllUsers();
+    return persons;
+  };
+
+  useEffect(() => {
+    fetchData().then((persons) => {
+      setPersons(persons);
+    });
+  }, []);
   return (
     <>
       <main className="min-h-screen w-full bg-black/50 antialiased ">
